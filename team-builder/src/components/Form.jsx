@@ -1,14 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 
-const Form = ({ teamList, setTeamList }) => {
+const Form = ({ teamList, setTeamList, memberToEdit }) => {
   const [teamMember, setTeamMember] = useState({
     id: 0,
     name: '',
     email: '',
     role: '',
   });
+
+  useEffect(() => {
+    setTeamMember(memberToEdit);
+  }, [memberToEdit]);
 
   const handleChange = (evt) => {
     setTeamMember({ ...teamMember, [evt.target.name]: evt.target.value });
@@ -49,7 +53,7 @@ const Form = ({ teamList, setTeamList }) => {
           </label>
 
           <div className="control">
-            <button className="button is-primary" type="submit" value="Submit">Add Team Member</button>
+            <button className="button is-primary" type="submit" value="Submit">Submit</button>
           </div>
         </form>
       </div>
@@ -64,6 +68,12 @@ Form.propTypes = {
     }),
   ).isRequired,
   setTeamList: PropTypes.func.isRequired,
+  memberToEdit: PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string,
+    email: PropTypes.string,
+    role: PropTypes.string,
+  }).isRequired,
 };
 
 export default Form;

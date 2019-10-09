@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 
-const TeamList = ({ teamList }) => (
+const TeamList = ({ teamList, setMemberToEdit }) => (
   <section className="section">
     <div className="container">
       <div className="columns">
@@ -24,8 +24,10 @@ const TeamList = ({ teamList }) => (
               <button
                 type="submit"
                 className="button is-light"
+                onClick={() => (setMemberToEdit(teamMember))}
+                onKeyPress={() => (setMemberToEdit(teamMember))}
               >
-                    Edit
+                  Edit
               </button>
             </footer>
           </div>
@@ -41,6 +43,7 @@ TeamList.propTypes = {
       name: PropTypes.string,
     }),
   ).isRequired,
+  setMemberToEdit: PropTypes.func.isRequired,
 };
 
 export default TeamList;
