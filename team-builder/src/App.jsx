@@ -1,21 +1,18 @@
 import React, { useState } from 'react';
+import 'bulma';
 
 import TeamList from './components/TeamList';
-import TeamForm from './components/TeamForm';
+import Form from './components/Form';
 
 
 const App = () => {
-  const [teamList, setTeamList] = useState([{
-    id: 0,
-    name: '',
-    email: '',
-    role: '',
-  }]);
+  const [teamList, setTeamList] = useState([]);
+  const [memberToEdit, setMemberToEdit] = useState({});
 
   return (
     <>
-      <TeamList teamList={teamList} />
-      <TeamForm teamList={teamList} setTeamList={setTeamList} />
+      <TeamList teamList={teamList} setMemberToEdit={setMemberToEdit} />
+      <Form teamList={teamList} setTeamList={setTeamList} memberToEdit={memberToEdit} />
     </>
   );
 };
