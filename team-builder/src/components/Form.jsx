@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 
-const Form = ({ teamList, setTeamList, memberToEdit }) => {
-  const [teamMember, setTeamMember] = useState({
+const Form = ({
+  teamList, setTeamList, memberToEdit, editMember, isEditing
+}) => {
+  const [teamMember, addTeamMember] = useState({
     id: 0,
     name: '',
     email: '',
@@ -11,20 +13,32 @@ const Form = ({ teamList, setTeamList, memberToEdit }) => {
   });
 
   useEffect(() => {
-    setTeamMember(memberToEdit);
+    addTeamMember(memberToEdit);
   }, [memberToEdit]);
 
   const handleChange = (evt) => {
-    setTeamMember({ ...teamMember, [evt.target.name]: evt.target.value });
+    addTeamMember({ ...teamMember, [evt.target.name]: evt.target.value });
   };
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    setTeamMember({ ...teamMember, id: teamMember.id += 1 });
-    setTeamList([...teamList, teamMember]);
-    setTeamMember({
-      ...teamMember, name: '', email: '', role: '',
-    });
+
+    if (isEditing) {
+      editMember(memberToEdit, teamMember);
+    } else {
+      addTeamMember({
+        ...teamMember,
+        id: teamMember.id += 1,
+      });
+
+      setTeamList([...teamList, teamMember]);
+      addTeamMember({
+        ...teamMember,
+        name: '',
+        email: '',
+        role: '',
+      });
+    }
   };
 
   return (
@@ -74,6 +88,8 @@ Form.propTypes = {
     email: PropTypes.string,
     role: PropTypes.string,
   }).isRequired,
+  editMember: PropTypes.func.isRequired,
+  isEditing: PropTypes.bool.isRequired,
 };
 
 export default Form;
