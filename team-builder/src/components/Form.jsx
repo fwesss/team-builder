@@ -21,21 +21,37 @@ const Form = ({
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
+    let formIsValid = true;
 
-    if (memberToEdit.name) {
-      editMember(memberToEdit, teamMember);
-    } else {
-      addTeamMember({
-        ...teamMember,
-      });
+    if (!teamMember.name) {
+      formIsValid = false;
+      alert('Name cannot be empty.');
+    }
 
-      setTeamList([...teamList, teamMember]);
-      addTeamMember({
-        ...teamMember,
-        name: '',
-        email: '',
-        role: '',
-      });
+    if (typeof teamMember.name !== 'undefined') {
+      if (!teamMember.name.match(/^[a-zA-Z]+$/)) {
+        formIsValid = false;
+        alert('Name can only have letters in it.');
+      }
+    }
+
+    if (!teamMember.email) {
+      formIsValid = false;
+      alert('Email cannot be empty.');
+    }
+
+    if (formIsValid) {
+      if (memberToEdit.name) {
+        editMember(memberToEdit, teamMember);
+      } else {
+        setTeamList([...teamList, teamMember]);
+        addTeamMember({
+          ...teamMember,
+          name: '',
+          email: '',
+          role: '',
+        });
+      }
     }
   };
 
