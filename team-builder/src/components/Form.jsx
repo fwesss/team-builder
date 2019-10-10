@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 
 const Form = ({
-  teamList, setTeamList, memberToEdit, editMember, isEditing
+  teamList, setTeamList, memberToEdit, editMember,
 }) => {
   const [teamMember, addTeamMember] = useState({
     id: 0,
@@ -23,7 +23,7 @@ const Form = ({
   const handleSubmit = (evt) => {
     evt.preventDefault();
 
-    if (isEditing) {
+    if (memberToEdit.id) {
       editMember(memberToEdit, teamMember);
     } else {
       addTeamMember({
@@ -89,7 +89,6 @@ Form.propTypes = {
     role: PropTypes.string,
   }).isRequired,
   editMember: PropTypes.func.isRequired,
-  isEditing: PropTypes.bool.isRequired,
 };
 
 export default Form;

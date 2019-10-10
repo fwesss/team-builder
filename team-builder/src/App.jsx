@@ -13,7 +13,6 @@ const App = () => {
     email: '',
     role: '',
   });
-  const [isEditing, setIsEditing] = useState(false);
 
   const editMember = (edit, changedMember) => {
     setTeamList(teamList.map((member) => {
@@ -31,17 +30,12 @@ const App = () => {
 
   return (
     <>
-      <TeamList
-        teamList={teamList}
-        setMemberToEdit={setMemberToEdit}
-        setIsEditing={setIsEditing}
-      />
+      <TeamList teamList={teamList} setMemberToEdit={setMemberToEdit} />
       <Form
         teamList={teamList}
         setTeamList={setTeamList}
         memberToEdit={memberToEdit}
         editMember={editMember}
-        isEditing={isEditing}
       />
     </>
   );
