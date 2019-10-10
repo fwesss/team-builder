@@ -6,14 +6,13 @@ const Form = ({
   teamList, setTeamList, memberToEdit, editMember,
 }) => {
   const [teamMember, addTeamMember] = useState({
-    id: 0,
     name: '',
     email: '',
     role: '',
   });
 
   useEffect(() => {
-    addTeamMember(memberToEdit);
+    addTeamMember({ ...memberToEdit });
   }, [memberToEdit]);
 
   const handleChange = (evt) => {
@@ -23,12 +22,11 @@ const Form = ({
   const handleSubmit = (evt) => {
     evt.preventDefault();
 
-    if (memberToEdit.id) {
+    if (memberToEdit.name) {
       editMember(memberToEdit, teamMember);
     } else {
       addTeamMember({
         ...teamMember,
-        id: teamMember.id += 1,
       });
 
       setTeamList([...teamList, teamMember]);
@@ -83,7 +81,6 @@ Form.propTypes = {
   ).isRequired,
   setTeamList: PropTypes.func.isRequired,
   memberToEdit: PropTypes.shape({
-    id: PropTypes.number,
     name: PropTypes.string,
     email: PropTypes.string,
     role: PropTypes.string,

@@ -7,7 +7,7 @@ const TeamList = ({ teamList, setMemberToEdit }) => (
     <div className="container">
       <div className="columns is-centered">
         {teamList.map((teamMember) => (
-          <div className="column is-4" key={teamMember.id}>
+          <div className="column is-4" key={`${teamMember.name}-${teamMember.email}`}>
             <div className="container card">
               <header className="card-header">
                 <h2 className="card-header-title title">{teamMember.name}</h2>

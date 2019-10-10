@@ -8,7 +8,6 @@ import Form from './components/Form';
 const App = () => {
   const [teamList, setTeamList] = useState([]);
   const [memberToEdit, setMemberToEdit] = useState({
-    id: 0,
     name: '',
     email: '',
     role: '',
@@ -21,7 +20,6 @@ const App = () => {
     }));
 
     setMemberToEdit({
-      id: 0,
       name: '',
       email: '',
       role: '',
