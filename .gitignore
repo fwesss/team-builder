@@ -1,0 +1,9 @@
+.DS_Store
+.idea/
+team-builder/.eslintrc.json
+team-builder/.stylelintrc
+package-lock.json
+yarn.lock
+package.json
+node_modules/
+build/
